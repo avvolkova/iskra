@@ -1,0 +1,13 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-item {
+    margin-bottom: 10px;
+    height: 2em;
+    font-weight: bold;
+    color: rgb(64, 22, 218);
+    background-color: aliceblue;
+    border-radius: 3px;
+}
