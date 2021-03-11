@@ -1,4 +1,4 @@
-import { SET_TODO, DELETE, EDIT } from "../types/types";
+import { SET_TODO, DELETE, EDIT, GET_DATA } from "../types/types";
 const initial = [];
 
 export default function reducer(state = initial, { type, payload }) {
@@ -18,6 +18,8 @@ export default function reducer(state = initial, { type, payload }) {
             : item
         ),
       ];
+    case GET_DATA:
+      return payload;
     default:
       return state;
   }

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import setTodoAction from "../../redux/actionCreators/setTodoAction";
 import deleteAction from "../../redux/actionCreators/deleteAction";
 import editAction from "../../redux/actionCreators/editAction";
+import getFromDBAction from '../../redux/actionCreators/getFromDBAction';
 import ToDo from "../ToDo/ToDo";
 import InProgress from "../InProgress/InProgress";
 import Done from "../Done/Done";
@@ -14,7 +15,19 @@ export default function Main() {
   const todos = useSelector((store) =>
     store.filter((item) => item.type === "todo")
   );
+  const inprogs = useSelector((store) =>
+    store.filter((item) => item.type === "inProgress")
+  );
+  const dones = useSelector((store) =>
+    store.filter((item) => item.type === "done")
+  );
   const [todo, setTodo] = useState("");
+
+  /* getFromDB */
+  const getFromDB = async (event) => {
+    await dispatch(getFromDBAction());
+  };
+  useEffect(()=> {getFromDB()}, [])
 
   /* save item */
   const [type, getType] = useState("");
@@ -57,7 +70,7 @@ export default function Main() {
   const handleDelete = (id) => {
     dispatch(deleteAction(id));
   };
-  const variables = { todo, todos, editId, editText };
+  const variables = { todo, editId, editText };
   const funcs = {
     handleKeyPress,
     handleEdit,
@@ -70,9 +83,9 @@ export default function Main() {
   return (
     <>
       <Box display="flex" justifyContent="space-around">
-        <ToDo funcs={funcs} variables={variables} />
-        <InProgress />
-        <Done />
+        <ToDo todos={todos} funcs={funcs} variables={variables} />
+        <InProgress inprogs={inprogs} funcs={funcs} variables={variables} />
+        <Done todos={todos} funcs={funcs} variables={variables} />
       </Box>
     </>
   );

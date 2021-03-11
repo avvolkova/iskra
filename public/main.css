@@ -4,6 +4,7 @@
 }
 
 .task-item {
+    width: 25vw;
     margin-bottom: 10px;
     height: 2em;
     font-weight: bold;

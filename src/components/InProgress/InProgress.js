@@ -1,47 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { Input } from "@material-ui/core";
 import setTodoAction from "../../redux/actionCreators/setTodoAction";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import Card from "../Card/Card";
 
-export default function ToDo() {
-  const dispatch = useDispatch();
-  const inprogs = useSelector((store) =>
-    store.filter((item) => item.priority === "inProgress")
-  );
-  const [inprog, setInprog] = useState("");
-  const handleKeyPress = (event) => {
-    if (inprog && event.key === "Enter") {
-      dispatch(
-        setTodoAction({
-          name: inprog,
-          priority: "inProgress",
-          createDate: new Date(),
-        })
-      );
-      setInprog("");
-    }
-  };
+
+export default function InProgress({ inprogs, funcs, variables }) {
+  useEffect(() => funcs.getType("inProgress"), []);
 
   return (
     <div className="task-list">
       In Progress
       <Input
         placeholder="Введите задачу"
-        value={inprog}
-        onInput={(e) => setInprog(e.target.value)}
-        onKeyPress={handleKeyPress}
+        value={variables.todo}
+        onInput={(e) => funcs.setTodo(e.target.value)}
+        onKeyPress={funcs.handleKeyPress}
       />
       {inprogs.length >= 1 &&
-        inprogs.map((item) => {
+        inprogs.map(({ name, id }) => {
           return (
-            <div className="task-item" key={uuidv4()}>
-              {item.name}
-              <EditIcon />
-              <DeleteForeverIcon />
-            </div>
+            <Card
+              className="task-item"
+              key={id}
+              id={id}
+              funcs={funcs}
+              name={name}
+              variables={variables}
+            />
           );
         })}
     </div>
