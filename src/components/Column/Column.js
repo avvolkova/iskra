@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Input } from "@material-ui/core";
 import Card from "../Card/Card";
 import { v4 as uuidv4 } from "uuid";

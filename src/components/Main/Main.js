@@ -1,10 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
-import setTodoAction from "../../redux/actionCreators/setTodoAction";
-import deleteAction from "../../redux/actionCreators/deleteAction";
-import editAction from "../../redux/actionCreators/editAction";
-import getFromDBAction from "../../redux/actionCreators/getFromDBAction";
 import Column from "../Column/Column";
 import { Box } from "@material-ui/core";
 import { SORT_BY_DATE } from "../../redux/types/types";
