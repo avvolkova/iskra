@@ -4,27 +4,23 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Input } from "@material-ui/core";
 
 
-const Card = ({
-  handleChangeEdited,
-  handleSaveEdited,
-  handleEdit,
-  handleDelete, id, name, editId, editText
+const Card = ({ funcs, variables, id, name, 
 }) => {
   return (
     <div>
-      {editId && editId === id ? (
+      {variables.editId && variables.editId === id ? (
         <Input
           type="text"
           autoFocus={true}
-          onChange={(e) => handleChangeEdited(e)}
-          onKeyPress={(e) => handleSaveEdited(e)}
-          value={editText}
+          onChange={(e) => funcs.handleChangeEdited(e)}
+          onKeyPress={(e) => funcs.handleSaveEdited(e)}
+          value={variables.editText}
         />
       ) : (
         <span>{name}</span>
       )}
-      <EditIcon onClick={() => handleEdit(id)} />
-      <DeleteForeverIcon onClick={() => handleDelete(id)} />
+      <EditIcon onClick={() => funcs.handleEdit(id)} />
+      <DeleteForeverIcon onClick={() => funcs.handleDelete(id)} />
     </div>
   );
 };
