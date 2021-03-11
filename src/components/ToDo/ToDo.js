@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { Input } from "@material-ui/core";
 import setTodoAction from "../../redux/actionCreators/setTodoAction";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+
 import deleteAction from "../../redux/actionCreators/deleteAction";
 import editAction from "../../redux/actionCreators/editAction";
+import Card from '../Card/Card';
 
 export default function ToDo() {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ export default function ToDo() {
   );
   const [todo, setTodo] = useState("");
 
+  /* save item */
   const handleKeyPress = async (event) => {
     if (todo && event.key === "Enter") {
       await dispatch(
@@ -66,21 +67,19 @@ export default function ToDo() {
       {todos.length >= 1 &&
         todos.map(({ name, id }) => {
           return (
-            <div className="task-item" key={id} id={id}>
-              {editId && editId === id ? (
-                <Input
-                  type="text"
-                  autoFocus={true}
-                  onChange={(e) => handleChangeEdited(e)}
-                  onKeyPress={(e) => handleSaveEdited(e)}
-                  value={editText}
-                />
-              ) : (
-                <span>{name}</span>
-              )}
-              <EditIcon onClick={() => handleEdit(id)} />
-              <DeleteForeverIcon onClick={() => handleDelete(id)} />
-            </div>
+            <Card
+              className="task-item"
+              key={id}
+              id={id}
+              handleChangeEdited={handleChangeEdited}
+              handleSaveEdited={handleSaveEdited}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              id={id}
+              editId={editId}
+              editText={editText}
+              name={name}
+            />
           );
         })}
     </div>
