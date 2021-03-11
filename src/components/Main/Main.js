@@ -5,9 +5,7 @@ import setTodoAction from "../../redux/actionCreators/setTodoAction";
 import deleteAction from "../../redux/actionCreators/deleteAction";
 import editAction from "../../redux/actionCreators/editAction";
 import getFromDBAction from '../../redux/actionCreators/getFromDBAction';
-import ToDo from "../ToDo/ToDo";
-import InProgress from "../InProgress/InProgress";
-import Done from "../Done/Done";
+import Column from "../Column/Column";
 import { Box } from "@material-ui/core";
 
 export default function Main() {
@@ -83,9 +81,27 @@ export default function Main() {
   return (
     <>
       <Box display="flex" justifyContent="space-around">
-        <ToDo todos={todos} funcs={funcs} variables={variables} />
-        <InProgress inprogs={inprogs} funcs={funcs} variables={variables} />
-        <Done todos={todos} funcs={funcs} variables={variables} />
+        <Column
+          title={"To Do"}
+          type={"todo"}
+          cards={todos}
+          funcs={funcs}
+          variables={variables}
+        />
+        <Column
+          title={"In Progress"}
+          type={"inProgress"}
+          cards={inprogs}
+          funcs={funcs}
+          variables={variables}
+        />
+        <Column
+          title={"Done"}
+          type={"done"}
+          cards={dones}
+          funcs={funcs}
+          variables={variables}
+        />
       </Box>
     </>
   );

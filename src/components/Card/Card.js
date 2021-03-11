@@ -7,7 +7,7 @@ import { Input } from "@material-ui/core";
 const Card = ({ funcs, variables, id, name, 
 }) => {
   return (
-    <div>
+    <div className="task-item">
       {variables.editId && variables.editId === id ? (
         <Input
           type="text"
