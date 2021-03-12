@@ -4,9 +4,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import deleteAction from "../../redux/actionCreators/deleteAction";
 import editAction from "../../redux/actionCreators/editAction";
+import priorityAction from '../../redux/actionCreators/priorityAction';
 import { Input } from "@material-ui/core";
 
-const Card = ({ cards, id, name, date }) => {
+const Card = ({ cards, id, name, date, priority }) => {
   const dispatch = useDispatch();
 
   /* edit */
@@ -30,8 +31,13 @@ const Card = ({ cards, id, name, date }) => {
   };
 
   /* delete */
-  const handleDelete = (id) => {
-    dispatch(deleteAction(id));
+  const handleDelete = async (id) => {
+    await dispatch(deleteAction(id));
+  };
+
+  /* toggle priority */
+  const togglePriority = async () => {
+    await dispatch(priorityAction(id))
   };
 
   return (
@@ -49,6 +55,11 @@ const Card = ({ cards, id, name, date }) => {
           <span>{name}</span>
         )}
       </div>
+      <div
+        title="Priority"
+        className={`priority ${priority ? "red" : ""}`}
+        onClick={togglePriority}
+      ></div>
       <div className="time">{date}</div>
       <div className="btns">
         <EditIcon onClick={() => handleEdit(id)} />

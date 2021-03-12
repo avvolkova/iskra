@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Column from "../Column/Column";
 import { Box } from "@material-ui/core";
-import { SORT_BY_DATE } from "../../redux/types/types";
+import { SORT_BY_DATE, SORT_BY_PRIORITY } from "../../redux/types/types";
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -21,13 +21,20 @@ export default function Main() {
     await dispatch({ type: SORT_BY_DATE });
   };
 
+  /* sort by priority */
+  const sortByPriority = async () => {
+    await dispatch({ type: SORT_BY_PRIORITY });
+  };
+
   return (
     <>
       <div className="sort-block">
         <span className="sort" onClick={() => sortByDate()}>
           По дате создания
         </span>
-        <span className="sort">По приоритету</span>
+        <span className="sort" onClick={() => sortByPriority()}>
+          По приоритету
+        </span>
       </div>
       <Box display="flex" justifyContent="space-around">
         <Column title={"To Do"} type={"todo"} cards={todos} />

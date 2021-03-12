@@ -46,7 +46,7 @@ export default function Column({ type, title, cards }) {
       />
   
       {cards.length >= 1 &&
-        cards.map(({ name, id, createDate }) => {
+        cards.map(({ name, id, createDate, priority }) => {
           return (
             <Card
               cards={cards}
@@ -54,6 +54,7 @@ export default function Column({ type, title, cards }) {
               id={id}
               name={name}
               date={new Date(createDate).toLocaleString()}
+              priority={priority}
             />
           );
         })}

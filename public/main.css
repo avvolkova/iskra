@@ -49,6 +49,18 @@
     max-width: 40%;
 }
 
+.priority {
+    width: 10px;
+    height: 10px;
+    border: 2px solid black;
+    border-radius: 50%;
+    margin-right: 3%;
+}
+
+.red {
+    background-color: crimson;
+}
+
 .sort:hover {
     background-color: rgb(200, 179, 179);
 }
